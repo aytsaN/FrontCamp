@@ -1,3 +1,5 @@
+import "../style/style.css";
+
 (async () => {
 
 async function getSources(url) {
