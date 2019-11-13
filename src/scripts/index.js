@@ -1,42 +1,28 @@
-import "../style/style.css";
+import "../styles/style.css";
+
+import { config } from "./config";
+import { RequestSources, RequestNews } from "./getUrl";
+import { Data } from "./Data";
+import { Sourses } from "./SourcesContent";
+import { News } from "./NewsContent";
 
 (async () => {
 
-async function getSources(url) {
-  let response = await fetch(`${url}`);
-  return await response.json();
-}
+    const requestSources = new RequestSources();
+    const request = new Data(requestSources);
+    const dataSources = await request.data();
+    const sources = new Sourses(dataSources);
+    sources.addContentDocument();
 
-const apiKey = 'adb1c21889ad46df8aacb6d566c97770';
-	const listNews = document.querySelector('#nav');
-  await getSources(`https://newsapi.org/v1/sources`)
-		.then(dataSources => {
-	  	let navList = dataSources.sources.reduce((acc, item) => {
-	  		 return acc += `<div id="${item.id}" class="source-item">${item.name.length > 10 ? item.name.substring(0,10)+'..' : item.name}
-						<span class="tooltiptext">${item.name}</span>
-	  		 </div>`
-				}, '');
-				listNews.innerHTML = navList;
-  });
-
-  listNews.addEventListener('click', async (e) => {
-  	if (e.target.className === 'source-item') {
-    	await getSources(`https://newsapi.org/v1/articles?source=${e.target.id}&apiKey=${apiKey}`)
-    		.then(scroll(0, listNews.offsetHeight))
-    		.then(dataArticles => {
-    			let articleSection = document.querySelector('#section');
-    			let articlesList = dataArticles.articles.reduce((acc, item) => {
-			  		return acc += `<a href="${item.url}"><article class="article" ${item.urlToImage ? `style="background-image: url('${item.urlToImage}');"` : ''}>
-			  		<h3 class="article-title">${item.title ? item.title : ''}</h3>
-			  		<p class="article-descr">${item.description ? item.description : ''}
-				  		<time>${item.publishedAt ? item.publishedAt.substring(0,10) : ''}</time>
-				  		<span class="author">${item.author ? item.author : ''}</span>
-				  	</p>
-			  		</article></a>`
-						}, '');
-    			articleSection.innerHTML = articlesList;
-    		});
-  	}
-  })
- })()
-
+    sources.element.addEventListener('click', async (e) => {
+        if (e.target.className === 'source-item') {
+            const requestNews = new RequestNews(e.target.id, config.apiKey);
+            const request = new Data(requestNews);
+            const dataNews = await request.data();
+            if (dataNews) {
+                const news = new News(dataNews);
+                news.addContentDocument();
+            }
+        }
+    });
+})()
