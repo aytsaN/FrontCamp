@@ -4,7 +4,7 @@
     padding: 0px;
 }
 
-.main {
+main {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
@@ -12,7 +12,7 @@
     background: rgb(250, 242, 215);
 }
 
-.nav {
+#header-navigation {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -20,27 +20,27 @@
     background: rgba(251, 250, 248, 0.98);
 }
 
-.nav div {
+#header-navigation div {
     position: relative;
     margin: 3px 5px;
     font-size: 14px;
     color: rgb(0, 0, 0);
 }
 
-.nav div:nth-child(2n+1) {
+#header-navigation div:nth-child(2n+1) {
     font-size: 18px;
 }
 
-.nav div:nth-child(7n+5) {
+#header-navigation div:nth-child(7n+5) {
     font-size: 20px;
 }
 
-.nav div:hover {
+#header-navigation div:hover {
     color: rgba(0, 0, 0, 0.5);
     cursor: pointer;
 }
 
-.nav div .tooltiptext {
+#header-navigation div .tooltiptext {
     visibility: hidden;
     background-color: rgba(0, 0, 0, 0.9);
     color: rgb(255, 255, 255);
@@ -55,24 +55,24 @@
     margin-left: -60px;
 }
 
-.nav div:hover .tooltiptext {
+#header-navigation div:hover .tooltiptext {
     visibility: visible;
 }
 
-.section {
+.news-section {
     padding: 20px 5%;
     display: flex;
     justify-content: space-around;
     flex-wrap: wrap;
 }
 
-.section a {
+.news-section a {
     width: 47%;
     text-decoration: none;
     color: #000000;
 }
 
-.section a .article {
+.news-section a .article {
     height: 350px;
     margin: 15px 0px;
     display: flex;
@@ -84,7 +84,7 @@
     box-shadow: -5px -5px 13px 0px rgba(0, 0, 0, 0.75);
 }
 
-.section a .article:hover {
+.news-section a .article:hover {
     box-shadow: -5px -5px 94px 0px rgba(253, 255, 133, 0.5);
 }
 
