@@ -1,5 +1,7 @@
 import "../style/style.css";
 
+import { config } from "./config";
+
 (async () => {
 
     class RequestSources {
@@ -61,8 +63,6 @@ import "../style/style.css";
         }
     }
 
-    const apiKey = 'adb1c21889ad46df8aacb6d566c97770';
-
     const requestSources = new RequestSources();
     const request = new Data(requestSources);
     const dataSources = await request.data();
@@ -73,7 +73,7 @@ import "../style/style.css";
 
     contentSources.element.addEventListener('click', async (e) => {
         if (e.target.className === 'source-item') {
-            const requestArticles = new RequestNews(e.target.id, apiKey);
+            const requestArticles = new RequestNews(e.target.id, config.apiKey);
             const request = new Data(requestArticles);
             const dataNews = await request.data();
             if (dataNews) {
