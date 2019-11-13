@@ -1,109 +1,108 @@
 * {
-	margin: 0px;
-	border: 0px;
-	padding: 0px;
+    margin: 0px;
+    border: 0px;
+    padding: 0px;
 }
 
 .main {
-	min-height: 100vh;
-	display: flex;
-	flex-direction: column;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
 
-	background: rgb(250, 242, 215);
+    background: rgb(250, 242, 215);
 }
 
 .nav {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	flex-wrap: wrap;
-	background: rgba(251, 250, 248, 0.98);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    background: rgba(251, 250, 248, 0.98);
 }
 
 .nav div {
-	position: relative;
-	margin: 3px 5px;
-	font-size: 14px;
-	color: rgb(0, 0, 0);
+    position: relative;
+    margin: 3px 5px;
+    font-size: 14px;
+    color: rgb(0, 0, 0);
 }
 
 .nav div:nth-child(2n+1) {
-	font-size: 18px;
+    font-size: 18px;
 }
 
 .nav div:nth-child(7n+5) {
-	font-size: 20px;
-} 
+    font-size: 20px;
+}
 
 .nav div:hover {
-	color: rgba(0, 0, 0, 0.5);
-	cursor: pointer;
+    color: rgba(0, 0, 0, 0.5);
+    cursor: pointer;
 }
 
 .nav div .tooltiptext {
-  visibility: hidden;
-  background-color: rgba(0, 0, 0, 0.9);
-  color: rgb(255, 255, 255); 
-  text-align: center;
-  border-radius: 3px;
-  padding: 3px;
+    visibility: hidden;
+    background-color: rgba(0, 0, 0, 0.9);
+    color: rgb(255, 255, 255);
+    text-align: center;
+    border-radius: 3px;
+    padding: 3px;
 
-  position: absolute;
-  z-index: 1;
-  top: 100%;
-  left: 50%;
-  margin-left: -60px;
+    position: absolute;
+    z-index: 1;
+    top: 100%;
+    left: 50%;
+    margin-left: -60px;
 }
 
 .nav div:hover .tooltiptext {
-  visibility: visible;
+    visibility: visible;
 }
 
 .section {
-	padding: 20px 5%;
-	display: flex;
-	justify-content: space-around;
-	flex-wrap: wrap;
+    padding: 20px 5%;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
 }
 
 .section a {
-	width: 47%;
-	text-decoration: none;
-	color: #000000;
+    width: 47%;
+    text-decoration: none;
+    color: #000000;
 }
 
 .section a .article {
-	height: 350px;
-	margin: 15px 0px;
-	display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-	background: linear-gradient(135deg, rgba(226,226,226,1) 0%, rgba(219,219,219,1) 30%, rgba(254,254,254,1) 100%);;
-  background-position: center;
-  background-size: cover;
-  box-shadow: -5px -5px 13px 0px rgba(0, 0, 0, 0.75);
+    height: 350px;
+    margin: 15px 0px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background: linear-gradient(135deg, rgba(226, 226, 226, 1) 0%, rgba(219, 219, 219, 1) 30%, rgba(254, 254, 254, 1) 100%);
+    background-position: center;
+    background-size: cover;
+    box-shadow: -5px -5px 13px 0px rgba(0, 0, 0, 0.75);
 }
 
-.section a .article:hover{
-	box-shadow: -5px -5px 94px 0px rgba(253, 255, 133, 0.5);
+.section a .article:hover {
+    box-shadow: -5px -5px 94px 0px rgba(253, 255, 133, 0.5);
 }
 
 .article .article-title {
-  background: rgba(255,255,255,0.95);
-  text-align: center;
-  padding: 1px;
+    background: rgba(255, 255, 255, 0.95);
+    text-align: center;
+    padding: 1px;
 }
 
 .article .article-descr {
-	margin: 0px 4px 8px;
-	padding: 0px 2px;
-	display: flex;
-  flex-direction: column;
-	background-color: rgba(255,255,255,0.75);
+    margin: 0px 4px 8px;
+    padding: 0px 2px;
+    display: flex;
+    flex-direction: column;
+    background-color: rgba(255, 255, 255, 0.75);
 }
 
 .article-descr .author,
 .article-descr time {
-	align-self: flex-end;
+    align-self: flex-end;
 }
-
