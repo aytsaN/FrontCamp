@@ -2,38 +2,42 @@ import "../style/style.css";
 
 (async () => {
 
-    class Request {
-        constructor(url) {
-            this.url = url;
+    class RequestSources {
+        getUrl() {
+            return 'https://newsapi.org/v1/sources';
         }
+    }
 
-        async getResponse() {
-            let response = await fetch(this.url);
-            return response.json();
+    class RequestNews {
+        constructor(target, apiKey) {
+            this.getUrl = () => `https://newsapi.org/v1/articles?source=${target}&apiKey=${apiKey}`;
+        }
+    }
+
+    class Data {
+        constructor(url) {
+            this.url = url.getUrl();
+            this.data = async () => {
+                let response = await fetch(this.url);
+                return response.json();
+            }
         }
     }
 
     class Sourses {
         constructor(data) {
-            this.listNews = document.querySelector('#nav');
+            this.element = document.querySelector('#nav');
             this.content = data.sources.reduce((acc, item) => {
                 return acc += `<div id="${item.id}" class="source-item">${item.name.length > 10 ? item.name.substring(0,10)+'..' : item.name}
 						<span class="tooltiptext">${item.name}</span>
 	  		 </div>`
             }, '');
         }
-
-
-        addSources() {
-            this.listNews.innerHTML = this.content;
-        }
-
     }
-
 
     class News {
         constructor(data) {
-            this.articleSection = document.querySelector('#section');
+            this.element = document.querySelector('#section');
             this.content = data.articles.reduce((acc, item) => {
                 return acc += `<a href="${item.url}"><article class="article" ${item.urlToImage ? `style="background-image: url('${item.urlToImage}');"` : ''}>
 									  		<h3 class="article-title">${item.title ? item.title : ''}</h3>
@@ -44,33 +48,39 @@ import "../style/style.css";
 									  		</article></a>`
             }, '');
         }
+    }
 
-        addNews() {
-            this.articleSection.innerHTML = this.content;
+    class Content {
+        constructor(data) {
+            this.content = data.content;
+            this.element = data.element;
+        }
+
+        addContentDocument() {
+            this.element.innerHTML = this.content;
         }
     }
 
-
-    const sourceUrl = 'https://newsapi.org/v1/sources';
-
     const apiKey = 'adb1c21889ad46df8aacb6d566c97770';
 
-    const requestSources = new Request(sourceUrl);
-    const dataSources = await requestSources.getResponse();
+    const requestSources = new RequestSources();
+    const request = new Data(requestSources);
+    const dataSources = await request.data();
+
     const sources = new Sourses(dataSources);
-    sources.addSources();
-    sources.listNews.addEventListener('click', async (e) => {
+    const contentSources = new Content(sources);
+    contentSources.addContentDocument();
+
+    contentSources.element.addEventListener('click', async (e) => {
         if (e.target.className === 'source-item') {
-            const articlesUrl = `https://newsapi.org/v1/articles?source=${e.target.id}&apiKey=${apiKey}`;
-            const requestArticles = new Request(articlesUrl);
-            const dataNews = await requestArticles.getResponse();
+            const requestArticles = new RequestNews(e.target.id, apiKey);
+            const request = new Data(requestArticles);
+            const dataNews = await request.data();
             if (dataNews) {
                 const news = new News(dataNews);
-                news.addNews();
+                const contentNews = new Content(news);
+                contentNews.addContentDocument();
             }
         }
     });
-
-
-
 })()
